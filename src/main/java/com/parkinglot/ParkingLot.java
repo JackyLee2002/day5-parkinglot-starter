@@ -1,11 +1,12 @@
 package com.parkinglot;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ParkingLot {
 
     public static final int DEFAULT_LOT_CAPACITY = 10;
-    
+
     private Integer capacity;
 
     HashMap<Ticket, Car> parkingRecords = new HashMap<>();
@@ -26,6 +27,9 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        return parkingRecords.remove(ticket);
+        Car car = parkingRecords.remove(ticket);
+        if (Objects.isNull(car)) return null;
+        ticket.setUsed(true);
+        return car;
     }
 }

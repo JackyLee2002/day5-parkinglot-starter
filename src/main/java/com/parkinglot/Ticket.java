@@ -10,4 +10,8 @@ public class Ticket {
     Ticket() {
         this.isUsed = false;
     }
+
+    public void setUsed(Boolean isUsed) {
+        this.isUsed = isUsed;
+    }
 }
