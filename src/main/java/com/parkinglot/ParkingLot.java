@@ -24,7 +24,7 @@ public class ParkingLot {
 
     public Ticket park(Car car) throws NoAvailablePositionException {
         if (parkingRecords.size() >= capacity) {
-            throw new NoAvailablePositionException(NO_AVAILABLE_POSITION_MESSAGE);
+            throw new NoAvailablePositionException();
         }
         Ticket ticket = new Ticket();
         parkingRecords.put(ticket, car);
@@ -33,7 +33,7 @@ public class ParkingLot {
 
     public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {
         if (ticket.isUsed() || !parkingRecords.containsKey(ticket)) {
-            throw new UnrecognizedParkingTicketException(UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+            throw new UnrecognizedParkingTicketException();
         }
         Car car = parkingRecords.remove(ticket);
         ticket.setUsed(true);
