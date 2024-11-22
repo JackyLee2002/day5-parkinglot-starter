@@ -30,16 +30,6 @@ public class ParkingBoy {
         return parkingStrategy.getAvailableParkingLot(parkingLots);
     }
 
-//    public ParkingLot getAvailabeParkingLot() throws NoAvailablePositionException {
-//        ParkingLot resultParkingLot = parkingLots.stream().filter(parkingLot -> !parkingLot.isParkingLotFull()).findFirst()
-//                .orElse(null);
-//        if (resultParkingLot == null) {
-//            throw new NoAvailablePositionException();
-//        } else {
-//            return resultParkingLot;
-//        }
-//    }
-
     public Ticket park(Car car) {
         ParkingLot availableParkingLot = getAvailabeParkingLot();
         return availableParkingLot.park(car);
