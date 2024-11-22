@@ -32,4 +32,12 @@ public class ParkingLot {
         ticket.setUsed(true);
         return car;
     }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public HashMap<Ticket, Car> getParkingRecords() {
+        return parkingRecords;
+    }
 }

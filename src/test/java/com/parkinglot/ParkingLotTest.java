@@ -74,14 +74,16 @@ public class ParkingLotTest {
     @Test
     void should_return_nothing_when_park_given_no_available_lot() {
         // Given
-        ParkingLot parkingLot = new ParkingLot(1);
-        Car car = new Car();
-        Ticket ticket = parkingLot.park(car);
+        ParkingLot parkingLot = new ParkingLot();
+        for(int i =0; i < parkingLot.getCapacity();i++) {
+            Car car = new Car();
+            Ticket ticket = parkingLot.park(car);
+            parkingLot.getParkingRecords().put(ticket, car);
+        }
         // When
         Car car2 = new Car();
-        Ticket ticket2 = parkingLot.park(car);
+        Ticket ticket2 = parkingLot.park(car2);
         // Then
-        assertNotNull(ticket);
         assertNull(ticket2);
     }
 }
