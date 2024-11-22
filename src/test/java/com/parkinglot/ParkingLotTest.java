@@ -115,7 +115,7 @@ public class ParkingLotTest {
         // When
         // Then
         Car car2 = new Car();
-        var exception = assertThrows(Exception.class, () -> parkingLot.park(car2),NO_AVAILABLE_POSITION_MESSAGE);
+        var exception = assertThrows(NoAvailablePositionException.class, () -> parkingLot.park(car2), NO_AVAILABLE_POSITION_MESSAGE);
     }
 
 
@@ -128,7 +128,7 @@ public class ParkingLotTest {
         Ticket wrongTicket = new Ticket();
         // When
         // Then
-        assertThrows(Exception.class, () -> parkingLot.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
     }
 
     @Test
@@ -141,7 +141,7 @@ public class ParkingLotTest {
         // Then
         Car fetchedCar = parkingLot.fetch(ticket);
         assertNotNull(fetchedCar);
-        assertThrows(Exception.class, () -> parkingLot.fetch(ticket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+        assertThrows(UnrecognizedParkingTicketException.class, () -> parkingLot.fetch(ticket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
 
     }
 
