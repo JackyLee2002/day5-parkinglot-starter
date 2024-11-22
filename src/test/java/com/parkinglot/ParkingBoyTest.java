@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParkingBoyTest {
 
     public static final String UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE = "Unrecognized parking ticket.";
+    public static final String NO_AVAILABLE_POSITION_MESSAGE = "No available position.";
 
     @Test
     void should_return_ticket_when_park_given_a_car_and_a_parking_boy() {
@@ -48,7 +49,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    void should_return_nothing_with_error_message_when_park_given_uncognized_ticket() throws Exception {
+    void should_return_nothing_with_error_message_when_park_given_uncognized_ticket_and_a_parking_boy() throws Exception {
         // Given
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car();
@@ -60,7 +61,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    void should_return_nothing_with_error_message_when_park_given_used_ticket() throws Exception {
+    void should_return_nothing_with_error_message_when_park_given_used_ticket_and_a_parking_boy() throws Exception {
         // Given
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car();
@@ -70,6 +71,21 @@ public class ParkingBoyTest {
         Car fetchedCar = parkingBoy.fetch(ticket);
         assertNotNull(fetchedCar);
         assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+    }
+
+    @Test
+    void should_return_nothing_with_error_message_when_park_given_no_available_lot_and_a_parking_boy() throws Exception {
+        // Given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        for (int i = 0; i < parkingBoy.getParkingLot().getCapacity(); i++) {
+            Car car = new Car();
+            Ticket ticket = parkingBoy.park(car);
+            parkingBoy.getParkingLot().getParkingRecords().put(ticket, car);
+        }
+        // When
+        // Then
+        Car car2 = new Car();
+        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car2), NO_AVAILABLE_POSITION_MESSAGE);
     }
 
 
