@@ -32,13 +32,10 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {
-        if (ticket.isUsed()) {
+        if (ticket.isUsed() || !parkingRecords.containsKey(ticket)) {
             throw new UnrecognizedParkingTicketException(UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
         }
         Car car = parkingRecords.remove(ticket);
-        if (Objects.isNull(car)) {
-            throw new UnrecognizedParkingTicketException (UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
-        }
         ticket.setUsed(true);
         return car;
     }
