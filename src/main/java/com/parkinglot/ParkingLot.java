@@ -37,12 +37,16 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {
-        if (ticket.isUsed() || !parkingRecords.containsKey(ticket)) {
-            throw new UnrecognizedParkingTicketException();
-        }
+        checkForUnrecognizedParkingTicket(ticket);
         Car car = parkingRecords.remove(ticket);
         ticket.setUsed(true);
         return car;
+    }
+
+    private void checkForUnrecognizedParkingTicket(Ticket ticket) {
+        if (ticket.isUsed() || !parkingRecords.containsKey(ticket)) {
+            throw new UnrecognizedParkingTicketException();
+        }
     }
 
     public boolean isParkingLotFull() {
