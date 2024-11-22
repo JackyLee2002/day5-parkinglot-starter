@@ -15,8 +15,8 @@ public class SuperParkingBoyTest {
     @Test
     void should_return_lot_two_parked_cars_when_park_given_two_lots_a_smart_parking_boy_and_a_car() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,100);
-        ParkingLot parkingLot2 = new ParkingLot(2,100);
+        ParkingLot parkingLot1 = new ParkingLot(1, 100);
+        ParkingLot parkingLot2 = new ParkingLot(2, 100);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1)));
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
@@ -31,8 +31,8 @@ public class SuperParkingBoyTest {
     @Test
     void should_return_lot_one_parked_cars_when_park_given_two_lots_a_smart_parking_boy_and_a_car() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,100);
-        ParkingLot parkingLot2 = new ParkingLot(2,100);
+        ParkingLot parkingLot1 = new ParkingLot(1, 100);
+        ParkingLot parkingLot2 = new ParkingLot(2, 100);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot2)));
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
@@ -47,9 +47,9 @@ public class SuperParkingBoyTest {
     @Test
     void should_return_lot_one_parked_cars_when_park_given_two_lots_equally_free_a_smart_parking_boy_and_a_car() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,100);
-        ParkingLot parkingLot2 = new ParkingLot(2,100);
-        SmartParkingBoy parkingBoy = new SmartParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1,parkingLot2)));
+        ParkingLot parkingLot1 = new ParkingLot(1, 100);
+        ParkingLot parkingLot2 = new ParkingLot(2, 100);
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         SuperParkingBoy superParkingBoy = new SuperParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
         Car car2 = new Car();

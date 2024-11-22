@@ -54,7 +54,7 @@ public class ParkingLot {
     }
 
     public double getPercentageOfFreePositions() {
-        return getNumberOfFreePositions()/capacity;
+        return getNumberOfFreePositions() / capacity;
     }
 
     public boolean isParkingLotFull() {

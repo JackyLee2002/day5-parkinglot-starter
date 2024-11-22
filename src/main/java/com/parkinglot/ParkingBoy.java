@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ParkingBoy {
-    protected  List<ParkingLot> parkingLots = new ArrayList<>();
+    protected List<ParkingLot> parkingLots = new ArrayList<>();
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
@@ -28,7 +28,7 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car) {
-       ParkingLot availableParkingLot = getAvailabeParkingLot();
+        ParkingLot availableParkingLot = getAvailabeParkingLot();
         return availableParkingLot.park(car);
     }
 
