@@ -14,8 +14,6 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        Car fetchedCar = parkingRecords.get(ticket);
-        if (Objects.nonNull(fetchedCar)) parkingRecords.remove(ticket);
-        return fetchedCar;
+        return parkingRecords.remove(ticket);
     }
 }
