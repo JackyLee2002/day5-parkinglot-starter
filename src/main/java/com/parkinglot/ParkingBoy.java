@@ -8,24 +8,37 @@ import java.util.Objects;
 
 public class ParkingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();
+    private ParkingStrategy parkingStrategy;
+
+    public ParkingBoy(List<ParkingLot> parkingLots, ParkingStrategy parkingStrategy) {
+        this.parkingLots = parkingLots;
+        this.parkingStrategy = parkingStrategy;
+    }
 
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
+        this.parkingStrategy = new DefaultParkingStrategy();
+
     }
 
     public ParkingBoy() {
         this.parkingLots = new ArrayList<>(Arrays.asList(new ParkingLot()));
+        this.parkingStrategy = new DefaultParkingStrategy();
     }
 
     public ParkingLot getAvailabeParkingLot() throws NoAvailablePositionException {
-        ParkingLot resultParkingLot = parkingLots.stream().filter(parkingLot -> !parkingLot.isParkingLotFull()).findFirst()
-                .orElse(null);
-        if (resultParkingLot == null) {
-            throw new NoAvailablePositionException();
-        } else {
-            return resultParkingLot;
-        }
+        return parkingStrategy.getAvailableParkingLot(parkingLots);
     }
+
+//    public ParkingLot getAvailabeParkingLot() throws NoAvailablePositionException {
+//        ParkingLot resultParkingLot = parkingLots.stream().filter(parkingLot -> !parkingLot.isParkingLotFull()).findFirst()
+//                .orElse(null);
+//        if (resultParkingLot == null) {
+//            throw new NoAvailablePositionException();
+//        } else {
+//            return resultParkingLot;
+//        }
+//    }
 
     public Ticket park(Car car) {
         ParkingLot availableParkingLot = getAvailabeParkingLot();
