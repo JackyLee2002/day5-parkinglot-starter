@@ -1,6 +1,7 @@
 package com.parkinglot;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ParkingLot {
 
@@ -13,6 +14,8 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        return parkingRecords.get(ticket);
+        Car fetchedCar = parkingRecords.get(ticket);
+        if (Objects.nonNull(fetchedCar)) parkingRecords.remove(ticket);
+        return fetchedCar;
     }
 }
