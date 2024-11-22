@@ -1,15 +1,17 @@
 package com.parkinglot;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ParkingLot {
 
     public static final int DEFAULT_LOT_CAPACITY = 10;
+    public static final String NO_AVAILABLE_POSITION_MESSAGE = "No available position.";
 
     private Integer capacity;
 
-    HashMap<Ticket, Car> parkingRecords = new HashMap<>();
+    Map<Ticket, Car> parkingRecords = new HashMap<>();
 
     public ParkingLot(Integer capacity) {
         this.capacity = capacity;
@@ -20,7 +22,10 @@ public class ParkingLot {
     }
 
     public Ticket park(Car car) {
-        if (parkingRecords.size() >= capacity) return null;
+        if (parkingRecords.size() >= capacity) {
+            System.out.print(NO_AVAILABLE_POSITION_MESSAGE);
+            return null;
+        }
         Ticket ticket = new Ticket();
         parkingRecords.put(ticket, car);
         return ticket;
@@ -37,7 +42,7 @@ public class ParkingLot {
         return capacity;
     }
 
-    public HashMap<Ticket, Car> getParkingRecords() {
+    public Map<Ticket, Car> getParkingRecords() {
         return parkingRecords;
     }
 }

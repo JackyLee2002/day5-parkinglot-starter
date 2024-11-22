@@ -1,10 +1,26 @@
 package com.parkinglot;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
+
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setup() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    private String systemOut() {
+        return outContent.toString();
+    }
+
     @Test
     void should_return_ticket_when_park_given_a_car() {
         // Given
@@ -86,4 +102,26 @@ public class ParkingLotTest {
         // Then
         assertNull(ticket2);
     }
+
+    @Test
+    void should_return_nothing_with_error_message_when_park_given_no_available_lot() {
+        // Given
+        ParkingLot parkingLot = new ParkingLot();
+        for(int i =0; i < parkingLot.getCapacity();i++) {
+            Car car = new Car();
+            Ticket ticket = parkingLot.park(car);
+            parkingLot.getParkingRecords().put(ticket, car);
+        }
+        // When
+        Car car2 = new Car();
+        Ticket ticket2 = parkingLot.park(car2);
+        // Then
+        assertNull(ticket2);
+        String expectedErrorMessage = "No available position.";
+        assertEquals(systemOut(), expectedErrorMessage);
+    }
+
+
+
+
 }
