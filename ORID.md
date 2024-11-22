@@ -1,0 +1,7 @@
+O:I learned more about using Test-Driven Development (TDD) and Object-Oriented Programming (OOP) to iteratively develop a complex Parking Lot program, ensuring that each component works as expected while making major changes to support the usecase. OOP principles like encapsulation, inheritance, and polymorphism were applied to create a flexible and maintainable codebase. Through practical examples, I practiced identifying common design patterns and applying TDD and OOP techniques to enhance code flexibility and reusability. We also conducted Retrospectives at the end of each iteration to reflect on our progress, identify areas for improvement, and plan actions for the next iteration.
+
+R: Exhausted
+
+I: Using TDD and OOP to develop the Parking Lot system was exhaustive and complex. The process required meticulous attention to detail and constant iteration, which was both mentally tiring and time-consuming. However, this exhaustive approach ensured that the system was thoroughly tested and well-designed, leading to a more reliable and maintainable codebase. The complexity of the task highlighted the importance of perseverance and teamwork in tackling challenging projects.
+
+D: Moving forward, I plan to integrate TDD and OOP techniques more consistently into my development workflow. This example has demonstrated the supporting capabilities of TDD and writing comprehensive unit tests after tasking. Ensuring a high standard of code quality.
