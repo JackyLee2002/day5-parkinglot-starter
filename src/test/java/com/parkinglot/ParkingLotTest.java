@@ -49,9 +49,11 @@ public class ParkingLotTest {
     void should_return_nothing_when_fetch_given_wrong_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        Ticket ticket = new Ticket();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        Ticket wrongTicket = new Ticket();
         // When
-        Car fetchedCar = parkingLot.fetch(ticket);
+        Car fetchedCar = parkingLot.fetch(wrongTicket);
         // Then
         assertEquals(null, fetchedCar);
     }
