@@ -104,7 +104,22 @@ public class ParkingBoyTest {
         // When
         Ticket ticket = parkingBoy.park(car);
         // Then
+        assertNotNull(ticket);
         assertTrue(parkingLot1.getParkingRecords().containsKey(ticket));
+    }
+
+    @Test
+    void should_returned_parked_cars_at_second_lot_when_park_given_a_parking_boy_and_a_car_and_two_lots() throws Exception {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot(1,0);
+        ParkingLot parkingLot2 = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
+        Car car = new Car();
+        // When
+        Ticket ticket = parkingBoy.park(car);
+        // Then
+        assertNotNull(ticket);
+        assertTrue(parkingLot2.getParkingRecords().containsKey(ticket));
     }
 
 }
