@@ -53,6 +53,10 @@ public class ParkingLot {
         return capacity - parkingRecords.size();
     }
 
+    public double getPercentageOfFreePositions() {
+        return getNumberOfFreePositions()/capacity;
+    }
+
     public boolean isParkingLotFull() {
         return parkingRecords.size() >= capacity;
     }
