@@ -6,8 +6,6 @@ import java.util.Map;
 public class ParkingLot {
 
     public static final int DEFAULT_LOT_CAPACITY = 10;
-    public static final String NO_AVAILABLE_POSITION_MESSAGE = "No available position.";
-    public static final String UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE = "Unrecognized parking ticket.";
 
     private Integer capacity;
 

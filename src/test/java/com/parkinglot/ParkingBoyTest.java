@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +18,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car();
         // When
-        Ticket ticket =parkingBoy.park(car);
+        Ticket ticket = parkingBoy.park(car);
         // Then
         assertNotNull(ticket);
     }
@@ -111,7 +110,7 @@ public class ParkingBoyTest {
     @Test
     void should_returned_parked_cars_at_second_lot_when_park_given_a_parking_boy_and_a_car_and_two_lots() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,0);
+        ParkingLot parkingLot1 = new ParkingLot(1, 0);
         ParkingLot parkingLot2 = new ParkingLot(2);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car = new Car();
@@ -125,8 +124,8 @@ public class ParkingBoyTest {
     @Test
     void should_returned_correct_parked_cars_at_second_lot_when_fetch_given_a_parking_boy_and_two_car_and_two_lots() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,1);
-        ParkingLot parkingLot2 = new ParkingLot(2,1);
+        ParkingLot parkingLot1 = new ParkingLot(1, 1);
+        ParkingLot parkingLot2 = new ParkingLot(2, 1);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
         Car car2 = new Car();
@@ -143,8 +142,8 @@ public class ParkingBoyTest {
     @Test
     void should_returned_nothing_with_err_message_when_fetch_given_a_parking_boy_and_two_lots_and_a_car_and_a_invalid_ticket() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,1);
-        ParkingLot parkingLot2 = new ParkingLot(2,1);
+        ParkingLot parkingLot1 = new ParkingLot(1, 1);
+        ParkingLot parkingLot2 = new ParkingLot(2, 1);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
         Ticket ticket1 = parkingBoy.park(car1);
@@ -157,8 +156,8 @@ public class ParkingBoyTest {
     @Test
     void should_returned_nothing_with_err_message_when_fetch_given_a_parking_boy_and_two_lots_and_a_car_and_a_used_ticket() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,1);
-        ParkingLot parkingLot2 = new ParkingLot(2,1);
+        ParkingLot parkingLot1 = new ParkingLot(1, 1);
+        ParkingLot parkingLot2 = new ParkingLot(2, 1);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
         Ticket ticket = parkingBoy.park(car1);
@@ -172,8 +171,8 @@ public class ParkingBoyTest {
     @Test
     void should_returned_nothing_with_err_message_when_park_given_a_parking_boy_and_two_full_lots_and_a_car() throws Exception {
         // Given
-        ParkingLot parkingLot1 = new ParkingLot(1,1);
-        ParkingLot parkingLot2 = new ParkingLot(2,1);
+        ParkingLot parkingLot1 = new ParkingLot(1, 1);
+        ParkingLot parkingLot2 = new ParkingLot(2, 1);
         ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
         Car car1 = new Car();
         Car car2 = new Car();
@@ -182,7 +181,7 @@ public class ParkingBoyTest {
         parkingBoy.park(car2);
         // When
         // Then
-        assertThrows(NoAvailablePositionException.class, () ->  parkingBoy.park(car3), NO_AVAILABLE_POSITION_MESSAGE);
+        assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car3), NO_AVAILABLE_POSITION_MESSAGE);
     }
 
 
