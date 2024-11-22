@@ -21,7 +21,7 @@ public class ParkingLot {
     }
 
     public ParkingLot(Integer id, Integer capacity) {
-        this.id = this.id;
+        this.id = id;
         this.capacity = capacity;
     }
 
@@ -33,7 +33,7 @@ public class ParkingLot {
         if (parkingRecords.size() >= capacity) {
             throw new NoAvailablePositionException();
         }
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(this.id);
         parkingRecords.put(ticket, car);
         return ticket;
     }

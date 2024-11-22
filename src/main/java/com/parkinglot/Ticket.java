@@ -5,8 +5,12 @@ public class Ticket {
 
     private Integer parkingLotId;
 
-    Ticket(Integer parkingLotId,Boolean isUsed) {
+    Ticket(Integer parkingLotId, Boolean isUsed) {
         this.isUsed = isUsed;
+        this.parkingLotId = parkingLotId;
+    }
+
+    Ticket(Integer parkingLotId) {
         this.parkingLotId = parkingLotId;
     }
 
@@ -20,5 +24,9 @@ public class Ticket {
 
     public boolean isUsed() {
         return isUsed;
+    }
+
+    public Integer getParkingLotId() {
+        return parkingLotId;
     }
 }

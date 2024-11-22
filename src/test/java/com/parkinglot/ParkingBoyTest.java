@@ -122,4 +122,22 @@ public class ParkingBoyTest {
         assertTrue(parkingLot2.getParkingRecords().containsKey(ticket));
     }
 
+    @Test
+    void should_returned_correct_parked_cars_at_second_lot_when_fetch_given_a_parking_boy_and_two_car_and_two_lots() throws Exception {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot(1,1);
+        ParkingLot parkingLot2 = new ParkingLot(2,1);
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Ticket ticket1 = parkingBoy.park(car1);
+        Ticket ticket2 = parkingBoy.park(car2);
+        // When
+        Car fetchedCar1 = parkingBoy.fetch(ticket1);
+        Car fetchedCar2 = parkingBoy.fetch(ticket2);
+        // Then
+        assertEquals(car1, fetchedCar1);
+        assertEquals(car2, fetchedCar2);
+    }
+
 }

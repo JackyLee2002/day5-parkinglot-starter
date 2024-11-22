@@ -4,6 +4,7 @@ package com.parkinglot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ParkingBoy {
     protected  List<ParkingLot> parkingLots = new ArrayList<>();
@@ -28,22 +29,19 @@ public class ParkingBoy {
 
     public Ticket park(Car car) {
        ParkingLot availableParkingLot = getAvailabeParkingLot();
-//       if (availableParkingLot == null) {
-//           throw new NoAvailablePositionException();
-//       }
         return availableParkingLot.park(car);
     }
 
     public Car fetch(Ticket ticket) {
-        Car parkedCar = parkingLots.stream()
+        return parkingLots.stream()
+                .filter(parkingLot -> Objects.equals(ticket.getParkingLotId(), parkingLot.getId()))
                 .map(parkingLot -> parkingLot.fetch(ticket))
                 .findFirst()
-                .orElseThrow(() -> new UnrecognizedParkingTicketException());
-        return parkedCar;
+                .orElseThrow(UnrecognizedParkingTicketException::new);
     }
 
     public ParkingLot findParkingLotById(Integer parkingLotId) {
-        return parkingLots.stream().filter(lot -> lot.getId() == parkingLotId).findFirst().orElse(null);
+        return parkingLots.stream().filter(lot -> Objects.equals(lot.getId(), parkingLotId)).findFirst().orElse(null);
     }
 
 
