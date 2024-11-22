@@ -44,4 +44,22 @@ public class SuperParkingBoyTest {
         assertTrue(parkingLot1.getParkingRecords().containsKey(ticket1));
     }
 
+    @Test
+    void should_return_lot_one_parked_cars_when_park_given_two_lots_equally_free_a_smart_parking_boy_and_a_car() throws Exception {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot(1,100);
+        ParkingLot parkingLot2 = new ParkingLot(2,100);
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1,parkingLot2)));
+        SmartParkingBoy superParkingBoy = new SmartParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        parkingBoy.park(car1);
+        parkingBoy.park(car2);
+        Ticket ticket1 = superParkingBoy.park(car3);
+        // When
+        // Then
+        assertTrue(parkingLot1.getParkingRecords().containsKey(ticket1));
+    }
+
 }
