@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
+    public static final String UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE = "Unrecognized parking ticket.";
+    public static final String NO_AVAILABLE_POSITION_MESSAGE = "No available position.";
+
     @Test
     void should_return_ticket_when_park_given_a_car() throws Exception {
         // Given
@@ -110,11 +113,9 @@ public class ParkingLotTest {
             parkingLot.getParkingRecords().put(ticket, car);
         }
         // When
-        Car car2 = new Car();
         // Then
-        var exception = assertThrows(Exception.class, () -> parkingLot.park(car2));
-        String expectedErrorMessage = "No available position.";
-        assertEquals(expectedErrorMessage, exception.getMessage());
+        Car car2 = new Car();
+        var exception = assertThrows(Exception.class, () -> parkingLot.park(car2),NO_AVAILABLE_POSITION_MESSAGE);
     }
 
 
@@ -126,10 +127,8 @@ public class ParkingLotTest {
         Ticket ticket = parkingLot.park(car);
         Ticket wrongTicket = new Ticket();
         // When
-        var exception = assertThrows(Exception.class, () -> parkingLot.fetch(wrongTicket));
         // Then
-        String expectedErrorMessage = "Unrecognized parking ticket.";
-        assertEquals(expectedErrorMessage, exception.getMessage());
+        assertThrows(Exception.class, () -> parkingLot.fetch(wrongTicket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
     }
 
     @Test
@@ -139,11 +138,11 @@ public class ParkingLotTest {
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         // When
-        Car fetchedCar = parkingLot.fetch(ticket);
-        var exception = assertThrows(Exception.class, () -> parkingLot.fetch(ticket));
         // Then
-        String expectedErrorMessage = "Unrecognized parking ticket.";
-        assertEquals(expectedErrorMessage, exception.getMessage());
+        Car fetchedCar = parkingLot.fetch(ticket);
+        assertNotNull(fetchedCar);
+        assertThrows(Exception.class, () -> parkingLot.fetch(ticket), UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+
     }
 
 
