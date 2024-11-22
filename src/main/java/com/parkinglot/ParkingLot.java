@@ -22,7 +22,7 @@ public class ParkingLot {
         this.capacity = DEFAULT_LOT_CAPACITY;
     }
 
-    public Ticket park(Car car) throws RuntimeException {
+    public Ticket park(Car car) throws NoAvailablePositionException {
         if (parkingRecords.size() >= capacity) {
             throw new NoAvailablePositionException(NO_AVAILABLE_POSITION_MESSAGE);
         }
@@ -31,7 +31,7 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car fetch(Ticket ticket) throws RuntimeException {
+    public Car fetch(Ticket ticket) throws UnrecognizedParkingTicketException {
         if (ticket.isUsed()) {
             throw new UnrecognizedParkingTicketException(UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
         }
