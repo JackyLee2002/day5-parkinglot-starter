@@ -2,6 +2,10 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingBoyTest {
@@ -35,7 +39,8 @@ public class ParkingBoyTest {
     @Test
     void should_return_correct_parked_cars_when_fetch_given_a_parking_boy_and_two_cars_and_two_tickets() throws Exception {
         // Given
-        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot)));
         Car car1 = new Car();
         Ticket ticket1 = parkingBoy.park(car1);
         Car car2 = new Car();
@@ -51,7 +56,8 @@ public class ParkingBoyTest {
     @Test
     void should_return_nothing_with_error_message_when_park_given_uncognized_ticket_and_a_parking_boy() throws Exception {
         // Given
-        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot)));
         Car car = new Car();
         Ticket ticket = parkingBoy.park(car);
         Ticket wrongTicket = new Ticket();
@@ -63,7 +69,8 @@ public class ParkingBoyTest {
     @Test
     void should_return_nothing_with_error_message_when_park_given_used_ticket_and_a_parking_boy() throws Exception {
         // Given
-        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot)));
         Car car = new Car();
         Ticket ticket = parkingBoy.park(car);
         // When
@@ -77,10 +84,9 @@ public class ParkingBoyTest {
     void should_return_nothing_with_error_message_when_park_given_no_available_lot_and_a_parking_boy() throws Exception {
         // Given
         ParkingBoy parkingBoy = new ParkingBoy();
-        for (int i = 0; i < parkingBoy.getParkingLot().getCapacity(); i++) {
+        for (int i = 0; i < 10; i++) {
             Car car = new Car();
             Ticket ticket = parkingBoy.park(car);
-            parkingBoy.getParkingLot().getParkingRecords().put(ticket, car);
         }
         // When
         // Then
@@ -88,5 +94,17 @@ public class ParkingBoyTest {
         assertThrows(NoAvailablePositionException.class, () -> parkingBoy.park(car2), NO_AVAILABLE_POSITION_MESSAGE);
     }
 
+    @Test
+    void should_returned_parked_cars_at_first_lot_when_park_given_a_parking_boy_and_a_car_and_two_lots() throws Exception {
+        // Given
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2)));
+        Car car = new Car();
+        // When
+        Ticket ticket = parkingBoy.park(car);
+        // Then
+        assertTrue(parkingLot1.getParkingRecords().containsKey(ticket));
+    }
 
 }
