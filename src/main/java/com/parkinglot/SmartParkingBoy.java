@@ -21,11 +21,4 @@ public class SmartParkingBoy extends ParkingBoy {
             return bestLot;
         }
     }
-
-    public Ticket park(Car car) {
-        ParkingLot availableParkingLot = getAvailabeParkingLot();
-        return availableParkingLot.park(car);
-    }
-
-
 }
