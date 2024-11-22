@@ -8,6 +8,7 @@ public class ParkingLot {
 
     public static final int DEFAULT_LOT_CAPACITY = 10;
     public static final String NO_AVAILABLE_POSITION_MESSAGE = "No available position.";
+    public static final String UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE = "Unrecognized parking ticket.";
 
     private Integer capacity;
 
@@ -21,19 +22,23 @@ public class ParkingLot {
         this.capacity = DEFAULT_LOT_CAPACITY;
     }
 
-    public Ticket park(Car car) {
+    public Ticket park(Car car) throws RuntimeException {
         if (parkingRecords.size() >= capacity) {
-            System.out.print(NO_AVAILABLE_POSITION_MESSAGE);
-            return null;
+            throw new RuntimeException (NO_AVAILABLE_POSITION_MESSAGE);
         }
         Ticket ticket = new Ticket();
         parkingRecords.put(ticket, car);
         return ticket;
     }
 
-    public Car fetch(Ticket ticket) {
+    public Car fetch(Ticket ticket) throws RuntimeException {
+        if (ticket.isUsed()) {
+            throw new RuntimeException (UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+        }
         Car car = parkingRecords.remove(ticket);
-        if (Objects.isNull(car)) return null;
+        if (Objects.isNull(car)) {
+            throw new RuntimeException (UNRECOGNIZED_PARKING_TICKET_ERROR_MESSAGE);
+        }
         ticket.setUsed(true);
         return car;
     }

@@ -14,4 +14,8 @@ public class Ticket {
     public void setUsed(Boolean isUsed) {
         this.isUsed = isUsed;
     }
+
+    public boolean isUsed() {
+        return isUsed;
+    }
 }

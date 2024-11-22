@@ -1,28 +1,13 @@
 package com.parkinglot;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
-    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setup() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    private String systemOut() {
-        return outContent.toString();
-    }
-
     @Test
-    void should_return_ticket_when_park_given_a_car() {
+    void should_return_ticket_when_park_given_a_car() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -33,7 +18,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_parked_car_when_fetch_given_a_ticket() {
+    void should_return_parked_car_when_fetch_given_a_ticket() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -45,7 +30,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_correct_parked_cars_when_fetch_given_two_cars_and_two_tickets() {
+    void should_return_correct_parked_cars_when_fetch_given_two_cars_and_two_tickets() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
@@ -61,67 +46,105 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_nothing_when_fetch_given_wrong_ticket() {
+    void should_return_nothing_when_fetch_given_wrong_ticket() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         Ticket wrongTicket = new Ticket();
         // When
-        Car fetchedCar = parkingLot.fetch(wrongTicket);
+        Car fetchedCar = null;
+        try {
+            fetchedCar = parkingLot.fetch(wrongTicket);
+        } catch (Exception ignored) {
+        }
         // Then
         assertEquals(null, fetchedCar);
     }
 
     @Test
-    void should_return_nothing_when_fetch_given_used_ticket() {
+    void should_return_nothing_when_fetch_given_used_ticket() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
         // When
         Car fetchedCar = parkingLot.fetch(ticket);
-        Car fetchedAgainCar = parkingLot.fetch(ticket);
+        Car fetchedAgainCar = null;
+        try {
+            fetchedAgainCar = parkingLot.fetch(ticket);
+        } catch (Exception ignored) {
+        }
         // Then
         assertEquals(car, fetchedCar);
         assertNull(fetchedAgainCar);
     }
 
     @Test
-    void should_return_nothing_when_park_given_no_available_lot() {
+    void should_return_nothing_when_park_given_no_available_lot() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        for(int i =0; i < parkingLot.getCapacity();i++) {
+        for (int i = 0; i < parkingLot.getCapacity(); i++) {
             Car car = new Car();
             Ticket ticket = parkingLot.park(car);
             parkingLot.getParkingRecords().put(ticket, car);
         }
         // When
         Car car2 = new Car();
-        Ticket ticket2 = parkingLot.park(car2);
+        Ticket ticket2 = null;
+        try {
+            ticket2 = parkingLot.park(car2);
+        } catch (Exception ignored) {
+        }
         // Then
         assertNull(ticket2);
     }
 
     @Test
-    void should_return_nothing_with_error_message_when_park_given_no_available_lot() {
+    void should_return_nothing_with_error_message_when_park_given_no_available_lot() throws Exception {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        for(int i =0; i < parkingLot.getCapacity();i++) {
+        for (int i = 0; i < parkingLot.getCapacity(); i++) {
             Car car = new Car();
             Ticket ticket = parkingLot.park(car);
             parkingLot.getParkingRecords().put(ticket, car);
         }
         // When
         Car car2 = new Car();
-        Ticket ticket2 = parkingLot.park(car2);
         // Then
-        assertNull(ticket2);
+        var exception = assertThrows(Exception.class, () -> parkingLot.park(car2));
         String expectedErrorMessage = "No available position.";
-        assertEquals(systemOut(), expectedErrorMessage);
+        assertEquals(expectedErrorMessage, exception.getMessage());
     }
 
 
+    @Test
+    void should_return_nothing_with_error_message_when_park_given_uncognized_ticket() throws Exception {
+        // Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        Ticket wrongTicket = new Ticket();
+        // When
+        var exception = assertThrows(Exception.class, () -> parkingLot.fetch(wrongTicket));
+        // Then
+        String expectedErrorMessage = "Unrecognized parking ticket.";
+        assertEquals(expectedErrorMessage, exception.getMessage());
+    }
+
+    @Test
+    void should_return_nothing_with_error_message_when_park_given_used_ticket() throws Exception {
+        // Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        // When
+        Car fetchedCar = parkingLot.fetch(ticket);
+        var exception = assertThrows(Exception.class, () -> parkingLot.fetch(ticket));
+        // Then
+        String expectedErrorMessage = "Unrecognized parking ticket.";
+        assertEquals(expectedErrorMessage, exception.getMessage());
+    }
 
 
 }
