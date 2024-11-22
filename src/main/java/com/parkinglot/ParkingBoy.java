@@ -39,10 +39,4 @@ public class ParkingBoy {
                 .findFirst()
                 .orElseThrow(UnrecognizedParkingTicketException::new);
     }
-
-    public ParkingLot findParkingLotById(Integer parkingLotId) {
-        return parkingLots.stream().filter(lot -> Objects.equals(lot.getId(), parkingLotId)).findFirst().orElse(null);
-    }
-
-
 }
