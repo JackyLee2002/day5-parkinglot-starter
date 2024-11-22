@@ -49,6 +49,10 @@ public class ParkingLot {
         }
     }
 
+    public Integer getNumberOfFreePositions() {
+        return capacity - parkingRecords.size();
+    }
+
     public boolean isParkingLotFull() {
         return parkingRecords.size() >= capacity;
     }
