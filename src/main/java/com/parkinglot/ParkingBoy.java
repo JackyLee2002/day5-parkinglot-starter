@@ -18,7 +18,6 @@ public class ParkingBoy {
     public ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
         this.parkingStrategy = new DefaultParkingStrategy();
-
     }
 
     public ParkingBoy() {
