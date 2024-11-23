@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class ParkingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();
-    private ParkingStrategy parkingStrategy;
+    private final ParkingStrategy parkingStrategy;
 
     public ParkingBoy(List<ParkingLot> parkingLots, ParkingStrategy parkingStrategy) {
         this.parkingLots = parkingLots;
@@ -21,7 +21,7 @@ public class ParkingBoy {
     }
 
     public ParkingBoy() {
-        this.parkingLots = new ArrayList<>(Arrays.asList(new ParkingLot()));
+        this.parkingLots = new ArrayList<>(List.of(new ParkingLot()));
         this.parkingStrategy = new DefaultParkingStrategy();
     }
 
